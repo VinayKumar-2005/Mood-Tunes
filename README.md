@@ -1,11 +1,25 @@
-This is the [assistant-ui](https://github.com/Yonom/assistant-ui) starter project.
-
 ## Getting Started
-
-First, add your OpenAI API key to `.env.local` file:
-
 ```
-OPENAI_API_KEY=sk-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+GOOGLE_GENERATIVE_AI_API_KEY=sk-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+YOUTUBE_API_KEY=sk-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+google gemini ai installations.: npm install @google/generative-ai
+
+and also add end point of gemini ai :
+
+import { google } from "@ai-sdk/google";
+import { streamText } from "ai";
+
+export const maxDuration = 30;
+
+export async function POST(req: Request) {
+  const { messages } = await req.json();
+  const result = streamText({
+    model: google("gemini-2.0-flash"),
+    messages,
+  });
+  return result.toDataStreamResponse();
+}
 ```
 
 Then, run the development server:
